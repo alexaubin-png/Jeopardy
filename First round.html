@@ -16,7 +16,7 @@
             <div class="hero" >
             <div  id="interact-cards" class="container1">
                 <div class="category1">sports</div>
-                <div id="for100" onclick = 'addCard()' class="score">100</div>
+                <div id="for100" onclick = 'addCard(); addCard(); addCard(); addCard(); addCard()'  class="score">100</div>
                 <div id = "for200" onclick = 'addCard2()' class="score">200</div>
                 <div id="for300" onclick = 'addCard3()' class="score">300</div>
                 <div id="for400" onclick = 'addCard4()'class="score">400</div>
@@ -65,7 +65,7 @@
         <form method="POST" acttion="/" class="content" id="answer-form">
         
                     <input id="answerText"class="text" placeholder="User Input">
-                    <br><button type="submit" onclick='addGuess(); addGuess2()'  id="guess-Button"class="btn">Guess</button>   <button id="pass-Button"  onclick = 'switchPlayers()'class="btn">Pass</button>
+                    <br><button type="submit" onclick='addGuess() '  id="guess-Button"class="btn">Guess</button>   <button id="pass-Button"  onclick = 'switchPlayers()'class="btn">Pass</button>
             
             
                         <p id= "playerOneScore" class="seperating-scores1">Player 1 score</p>
@@ -75,7 +75,9 @@
                     <a href="second round.html"><button id= "next-Round"class="btn">Next round</button></a> 
                     
         </form>
-        <script src="./script.js"></script>         
+        <script src="./script.js"></script>   
+    
+         
     </body>
     <footer>2024 Jeporday by: Alex</footer>
     </html>

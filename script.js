@@ -12,7 +12,7 @@
 // import data from "./questions.json" assert {type: 'json'} couldnt use import becauser youre mixing client side and server side info
 //questions for dante is why do my cards cross out 300 everytime
 console.log('hi')
-let currentScore = 0
+
 
 
 let startButton = document.getElementById('start-Btn')
@@ -38,46 +38,82 @@ guessButton.addEventListener('click', (e)=>{
 })
 const questions = [
 //jeopardyGameBoard[i].questions[x].text <= where I is what category and x is what value of points
-    { catergory: "when", questions:[
-{value: 100, text: "when is 4th of july"}, //4th of july
-{value: 200, text: "when is the month of christmas"},//december
-{value: 300, text: "when is the day of christmas"},//25th
-{value: 400, text: "when is the month of haloween"}, //october
-{value: 500, text: "when is the season of the solar eclipse most prolific at"}, //spring
-{level: "easy"}
+//     { catergory: "when", questions:[
+// {value: 100, text: "when is 4th of july"}, //4th of july
+// {value: 200, text: "when is the month of christmas"},//december
+// {value: 300, text: "when is the day of christmas"},//25th
+// {value: 400, text: "when is the month of haloween"}, //october
+// {value: 500, text: "when is the season of the solar eclipse most prolific at"}, //spring
+// {level: "easy"}
 
 
-    ]},
+//     ]},
+
+
     { category: 'Sports', questions: [
       { value: 100, text: "What sport uses a bat and a mit?", answer: "baseball" },
       { value: 200, text: "Which popular baseball team starts with R?", answer: "redsox" },
       {value: 300, text: "what play is made when a player gets hit by a ball"},
       {value: 400, text: "what is the biggesat sports fan rivalry in baseball"},
       {value: 500, text:"what is david ortiz's nickname everyone called him"},
-      {level: "hard",}
+      {level: "hard",},
+      {sums: "300"}
     ]},
-]
+    { category: 'when', questions: [
+        { value: 100, text: "when is the month of christmas", answer: "december" },
+        { value: 200, text: "what day is christmas on", answer: "december 25th" },
+        {value: 300, text: "santa claus real name", answer: "saint nick"},
+        {value: 400, text: "when is the month of valentines day", answer:"spring"},
+        {value: 500, text:"what day is valentines day"},
+        {level: "medium",}
+      ]},
+      { category: 'video games', questions: [
+        { value: 100, text: "What does CSGO stand for ", answer: "counter strik global offensive" },
+        { value: 200, text: "Minecraft is now owned by which major tech company", answer: "microsoft" },
+        {value: 300, text: "skyrim costs how much to develope", answer: "100 million"},
+        {value: 400, text: "whats the most anticpated game in 2026", answer:"gta6"},
+        {value: 500, text:"Faze clan competes most in what game", answer:"CSGO"},
+        {level: "slightly hard",}
+      ]},
+  
+  ]
+
+let currentPlayer = 1
+let playerOneScore = 0
+let playerTwoScore = 0
+
 
 
 window.onload = function () {
+    currentPlayer = 1
     switchPlayers1.textContent = "Player 1 Please pick a card";
     guessButton.disabled = true;
     passButton.disabled = true;
    nextRound.disabled = true;
   
 }
+let testing = questions[0].questions[0].text
+console.log(testing)
 
 
 // Function to add card for Sports category, value 100
 for100.addEventListener('click', () => {
     addCard();
+     currentPlayer = 1
+ currentScore = 0
+ currentScore1 = questions[0].questions[0].value
+console.log(currentScore1)
+
 });
-function addCard() {
-    for100.innerHTML = "which sport uses a bat and mit and competes for the furthest hit";
-    guessButton.disabled = false;
-    passButton.disabled = false;
-    switchPlayers1.innerHTML = "player 1 picked sports 100";
-}
+// function addCard() {
+    
+
+//     console.log(testing2)
+//     for100.innerHTML = "which sport uses a bat and mit and competes for the furthest hit";
+//     guessButton.disabled = false;
+//     passButton.disabled = false;
+//     switchPlayers1.innerHTML = "player 1 picked sports 100";
+// }
 
 // Event listener for Sports category, value 100
 
@@ -95,8 +131,8 @@ passButton.addEventListener('click', () => {
 
 
 // //starts the first QUESTION LOGIC WITH ENABLING BUTTONS
-function addCard(){
-for100.innerHTML = "which sport uses a bat and mit and competes for the furthest hit";
+async function addCard(){
+for100.innerHTML = "what sport competes for the furthest hit with a bat and mit"
 guessButton.disabled = false;
 passButton.disabled = false; 
 switchPlayers1.innerHTML = "player 1 picked sports 100";
@@ -106,6 +142,8 @@ switchPlayers1.innerHTML = "player 1 picked sports 100";
 
  for200.addEventListener('click', (e)=>{
      addCard2()
+     currentScore1 = questions[1].questions[1].value
+     console.log(currentScore1)
      
  })
 
@@ -117,6 +155,8 @@ function addCard2(){
 }
 for300.addEventListener('click', (e)=>{
     addCard3()
+    currentScore1 = questions[2].questions[2].value
+     console.log(currentScore1)
 })
 function addCard3(){
     for300.innerHTML = "what happens when the batter gets hit by a ball"
@@ -126,6 +166,8 @@ switchPlayers1.innerHTML = "player 1 picked sports 300";
 }
 for400.addEventListener('click', (e)=>{
     addCard4()
+    currentScore1 = questions[3].questions[3].value
+      console.log(currentScore1)
 })
  function addCard4(){
 document.getElementById('for400').innerHTML = 'What was the biggest fan rivalry between baseball teams'
@@ -146,48 +188,75 @@ for500.addEventListener('click', (e)=>{
     guessButton.disabled = false;
     passButton.disabled = false;
 switchPlayers1.innerHTML = "player 1 picked sports 500";
+currentScore = 100
+
 
 }
 
 async function switchPlayers(){
+    currentPlayer = currentPlayer === 1 ? 2 : 1;
+    document.getElementById('switchPlayers1').innerHTML = "it is now player twos turn to answer"
+    
+//question must be slected to switch        
+//add in funcitonality for player two to answer questions
+}
 
-   //if switch players make dynamic with variables
-document.getElementById('switchPlayers1').innerHTML = "it is now player twos turn"
 
-}//add in funcitonality for player two to answer questions
-
-//to summarize all this code is that the if else statements dynamically allow for any inputs passed to their params, that input is then entered by user 
+ 
 let form = document.getElementById('answer-form')
 
-//essentially allowing input for all questions
+
 playerOneScores = 0;
 playerTwoScores = 0;
  function addGuess(){
+    let currentScore = currentPlayer === 1 ? playerOneScore : playerTwoScore;
     let form = document.getElementById('answer-form')
     let test;
-  let test2 = for200.value     
-  test2 = document.getElementById('answerText').value
-let test3 = for300.value 
-test3 = document.getElementById('answerText').value
-// = document.getElementById('answerText').value
+    let test2 = for200.value     
+    test2 = answerText.value
+    let test3 = for300.value //Logic for reassigning variables to the DIVS and getting their values
+    test3 = answerText.value
     let test4 = for400.value
-    test4 = document.getElementById('answerText').value
-  test = document.getElementById('answerText').value
- let test5 = document.getElementById('for500').value
-  test5 = document.getElementById('answerText').value
-  if(test === 'baseball'){
+    test4 = answerText.value
+    test = answerText.value
+    let test5 = document.getElementById('for500').value
+    test5 = answerText.value
+    //original idea was if test is question one and test2 is question 2
+    // else if( test = test2){
+        // form.addEventListener('submit', (e)=>{
+        //     e.preventDefault()
+        //     addGuess()
+        // })
+    //     let sumOfOneTwo = questions[0].questions[6]
+    // console.log(sumOfOneTwo)
+    // playerOneScore.textContent = "youre score is 300"
+    // }
+  if(test === 'baseball'){  //essentially allowing input for all questions
      form.addEventListener('submit', (e)=>{
          e.preventDefault()
          addGuess()
      })
-         playerOnesPersonalScore.textContent = "Player 1 score = 100"
+      currentScore1
+     
+     currentScore1 = questions[0].questions[0].value
+     console.log(currentScore1)
+    console.log(`your total score is = ${currentScore1}`)
+         playerOnesPersonalScore.textContent = `your total score is = ${currentScore1}`
          for100.innerHTML = "X"
-     }else if(test2 === 'spring'){
+         
+         
+         
+     }
+     else if(test2 === 'spring'){
      form.addEventListener('submit', (e)=>{
          e.preventDefault()
     
          addGuess()
      })
+     currentScore1 = questions[1].questions[1].value
+     currentScore = 200
+     console.log(`your total score is = ${currentScore1}`)
+ 
      playerOnesPersonalScore.innerHTML = "Player 1 score = 200"//make this also correspond with palyer twos score by creating another variable called PlayerTwosPersonalScore
      //perhaps the amount of copies of the same ID is messing up the stuff
      for200.innerHTML = "X"
@@ -196,6 +265,9 @@ form.addEventListener('submit', (e)=>{
     e.preventDefault()
     addGuess()
 });
+currentScore1 = questions[2].questions[2].value
+console.log(currentScore1)
+console.log(`your total score is = ${currentScore1}`)
 for300.innerHTML = "x"
 playerOnesPersonalScore.innerHTML = "player 1 score is now 300";
      }else if(test4 === "yankees vs redsox"){
@@ -203,6 +275,9 @@ playerOnesPersonalScore.innerHTML = "player 1 score is now 300";
 e.preventDefault()
 addGuess()
 })
+currentScore1 = questions[3].questions[3].value
+console.log(currentScore1)
+console.log(`your total score is = ${currentScore1}`)
 playerOnesPersonalScore.innerHTML = "player 1 scire = 400"
 for400.innerHTML = "x"
         }
@@ -212,13 +287,17 @@ for400.innerHTML = "x"
             e.preventDefault()
             addGuess()
         })
+        currentScore1 = questions[4].questions[4].value
+        console.log(currentScore1)
+console.log(`your total score is = ${currentScore1}`)
     playerOnesPersonalScore.textContent = "Player 1 Score = 500"
     for500.innerHTML = "X"
     
     }else{
      switchPlayers()
     }
-    
+   
+
 }
     
 
@@ -229,5 +308,5 @@ for400.innerHTML = "x"
 // //each score in html will need its own similar ID with diff text content
 // //if question is wrong subtract points and then its player two turn
 // //if answer is correct add the score and pick again
-
+//after we add score, to increment depeding on the value copy and paste and repeat for player twos score, because player 2 score has its own ID
 
