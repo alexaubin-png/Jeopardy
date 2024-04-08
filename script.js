@@ -3,12 +3,11 @@ let startButton= document.getElementById('start-Btn')
 let guessButton = document.getElementById('guess-Button')
 let passButton = document.getElementById('pass-Button')
 let nextRound = document.getElementById('next-Round')
-const cards = document.getElementById('interact-cards')
-let answerTextr = document.getElementById('answerText')
 let switchPlayers1 = document.getElementById('switchPlayers1')
-let playerOnesScore = document.getElementById('playerOneScore')
-let PlayerTwosPersonalScore = document.getElementById('playerTwoScore')
-let guessButton2 = document.getElementById('guessButton2')
+let passButton1 = document.getElementById('Passto1')
+let finalAnswer = document.getElementById('finalAnswer')
+let finalBet = document.getElementById('finalBet')
+
 
 
 let points;
@@ -16,7 +15,7 @@ let points;
 const questions = [//questions [q].questions.find(q=>q.question)
       { category: 'Sports', value: 100, question: "What sport uses a bat and a mit?", answer: "baseball" },
       {category: 'Sports', value: 200, question: "when is baseball season", answer: "spring" },
-      {category: 'Sports', value: 300, question: "what play is made when a player gets hit by a ball", answer: "walk"},
+      {category: 'Sports', value: 300, question: "what play is made when a player gets hit by a ball(IN DEVELOPMENT)", answer: "a walk"},
       {category: 'Sports', value: 400, question: "what is the biggesat sports fan rivalry in baseball", answer: "redsox vs yankees"},
       {category: 'Sports', value: 500, question:"what is david ortiz's nickname everyone called him", answer: "bigpoppy"},
 
@@ -24,8 +23,8 @@ const questions = [//questions [q].questions.find(q=>q.question)
       {category: 'When', value: 100, question: "when is the month of christmas", answer: "december" },
       {category: 'When', value: 200, question: "what day is christmas on", answer: "december 25th" },
       {category: 'When', value: 300, question: "when does santa eat the cookies and drink the milk", answer: "christmas eve"},
-      {category: 'When', value: 400, question: "when is the month of valentines day", answer:"spring"},
-      {category: 'When', value: 500, question:"what day is valentines day"},
+      {category: 'When', value: 400, question: "when is the month of valentines day", answer:"febuary"},
+      {category: 'When', value: 500, question:"true or false valentines day is for LOVE", answer:" true"},
 
       {category: 'Video games', value: 100, question: "What does CSGO stand for ", answer: "counter strik global offensive" },
       {category: 'Video games', value: 200, question: "Minecraft is now owned by which major tech company", answer: "microsoft" },
@@ -45,12 +44,6 @@ const questions = [//questions [q].questions.find(q=>q.question)
  {category: "Religion", value: 300, question:"what religion is native to napal, india, ", answer:"hinduism"},
  {category: "Religion", value: 400, question:"what religion is native to africa, egypt, and west africa ", answer:"islam"},
  {category: "Religion", value: 500, question:"what religion is native to east asia", answer:"buddhism"},
-
- {category: "Comedy", value: 100, question:"which comedian played a role in the movie 'Scary Movie'", answer:"kevin hart "},
- {category: "Comedy", value: 200, question:"which comedian was born in  Philadelphia", answer:"kevin hart "},
- {category: "Comedy", value: 300, question:"which comedian is a ufc commentator", answer:"joe rogan "},
- {category: "Comedy", value: 400, question:"which comedian is african american, accomplished six emmy awards, five grammys, and starts with a D", answer:"dave chappelle "},
- {category: "Comedy", value: 500, question:"which comedian signed a $20 million dollar deal with netflix per episode", answer:"dave chappelle "}
 
   ]
 
@@ -92,7 +85,9 @@ selectedCardId = " ";
       switchPlayers()
       
   }
+ 
 }
+
 
 guessButton.addEventListener('click', function(e){
 e.preventDefault()
@@ -101,58 +96,47 @@ disableButtons()
 })
 function switchPlayers(){
   if(currentPlayer === 1) {
-    currentPlayer = 2
-
+    currentPlayer == 2
   }else{
     currentPlayer = 1
-    
   }
-  // scores[`player${currentPlayer}`] += points;
-
-  //     // update the displayed score
-  //     document.getElementById("player" + currentPlayer  + "-score").textContent = scores["player" + currentPlayer];
-
   switchPlayers1.textContent = "Player " + currentPlayer + " Please pick a card";
     guessButton.disabled = true;
     passButton.disabled = true;
     nextRound.disabled = true;
+    passButton1.disabled = true;
 }
-
-
-
-//  function correctAnswerScoring(){
-//    if(currentPlayer == 1) {
-//      playerOneScore += 1
-//    }else{
-//      playerTwoScore += 1
-//    }
-//  }
-
-function disableButtons(){
-  guessButton.disabled = true;
-  passButton.disabled = true;
-  nextRound.disabled = true;
-  
+function passingAnswer(){
+  switchPlayers()
 }
-
+passingAnswer();
+function disableButtons(){//Disables Buttons because of Globalization(when the page loads)
+   guessButton.disabled = true;
+   passButton.disabled = true;
+   nextRound.disabled = true;
+   passButton1.disabled = true;
+}
 disableButtons()
-function enablesButtons(){
+function enablesButtons(){//enables buttons when called upon in our event Listeners
   guessButton.disabled = false;
   passButton.disabled = false;
-  nextRound.disabled = false;
-  guessButton2.disabled = false;
+   nextRound.disabled = false;
+  passButton1.disabled = false;
 }
- function disableNonSelectedCards(){
 
- }
+ 
+ //eventListener with prevent default because its a button event
  passButton.addEventListener('click', (e)=>{
    e.preventDefault()
   
-  switchPlayers1.textContent = "player2 " + "please pick a card"
-   nextRound.disabled = false;
+  switchPlayers1.textContent = "player2 " + "please pick a card"//update the text on click/function of passButton
+  nextRound.disabled = false;//enable passButton
+  passButton1.disabled = false;
  })
-// // })
-// }
+ 
+ nextRound.addEventListener('click', (e)=>{
+submitAnswer()
+  })
 
  //TODO: remove commented code, add a function that disables submit and pass, add function that enables submit and pass. add empty event listeners for each card, addEventListener for submit and pass, fill out logic for each card very similar to below, test to see if it works, then add next round functionality with next round button(perhaps query params), add final jeopardy
 for100.addEventListener('click', (e)=>{
@@ -172,6 +156,7 @@ enablesButtons()
     points = 300; selcetedCardId = for300.id
     let currentQuestion = questions.find(q=> q.value === points).question
     for300.textContent = currentQuestion
+    console.log(questions.category)
     enablesButtons()
   }),
   for400.addEventListener('click', (e)=>{
@@ -334,25 +319,3 @@ div400.addEventListener("click", () =>{
   })
  
   
-  comedy100.addEventListener("click", (e)=>{
-    points = 100; selectedCardId = comedy100.id
-    let categoryQuestions = questions.filter(q=>q.category === "Comedy")
-    let currentQuestion = categoryQuestions.find(q=> q.value === points).question
-    comedy100.textContent = currentQuestion
-    enablesButtons()
-  })
-  comedy200.addEventListener("click", (e)=>{
-    points = 200; selectedCardId = comedy200.id
-    let categoryQuestions = questions.filter(q=>q.category === "Comedy")
-    let currentQuestion = categoryQuestions.find(q=> q.value === points).question
-    comedy200.textContent = currentQuestion
-    enablesButtons()
-  })
-  comedy300.addEventListener("click", (e)=>{
-    points = 300; selectedCardId = comedy300.id
-    let categoryQuestions = questions.filter(q=>q.category === "Comedy")
-    let currentQuestion = categoryQuestions.find(q=> q.value === points).question
-    comedy300.textContent = currentQuestion
-    enablesButtons()
-  })
- 
