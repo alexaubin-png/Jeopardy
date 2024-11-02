@@ -60,24 +60,26 @@
             
             
             
-        <!-- feel free to divide this conetnt altho i got it started -->
-        <div id="error" class="error"></div>
-        <form method="POST" acttion="/" class="content" id="answer-form">
-        
-                    <input id="answer"class="text" placeholder="User Input">
-                    <br><button type="submit" id="guess-Button"class="btn">Guess</button>   <button id="pass-Button"  onclick = 'switchPlayers()'class="btn">Pass</button><button id="Passto1"class="btn"onclick="passingAnswer()">Player 1</button><button class="btn" onclick = "clearBoard()">Clear Board</button>
-            
-            
-                        <p id= "player1-score" class="seperating-scores1">Player 1 score</p>
-                        <p id="player2-score" class="seperating-scores2">Player 2 score</p>     
-                
-                    
-                    <a href="./pagetwo.html"><button id= "next-Round"class="btn">Next round</button></a> 
-                    
-        </form>
-        <script src="./script.js"></script>   
+      <!-- feel free to divide this content although I got it started -->
+<div id="error" class="error"></div>
+<form method="POST" action="/" class="content" id="answer-form">
+    <input id="answer" class="text" placeholder="User Input">
+    <br>
+    <button type="submit" id="guess-Button" class="btn">Guess</button>
+    <button id="pass-Button" onclick='switchPlayers()' class="btn">Pass</button>
+    <button id="Passto1" class="btn" onclick="passingAnswer()">Player 1</button>
+    <button type='button' class="btn" onClick="clearBoard()">Clear Board</button>
+    <button class="btn" type="button" onclick='clearScore()'>Clear Score</button>
     
-         
-    </body>
-    <footer>2024 Jeporday by: Alex</footer>
-    </html>
+    <p id="player1-score" class="separating-scores1">Player 1 score</p>
+    <p id="player2-score" class="separating-scores2">Player 2 score</p>
+    
+    <a href="./pagetwo.html">
+        <button type='button' id="next-Round" class="btn">Next round</button>
+    </a>
+</form>
+<script src="./script.js"></script>
+
+</body>
+<footer>2024 Jeopardy by: Alex</footer>
+</html>

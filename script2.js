@@ -51,38 +51,49 @@ const questions = [//questions [q].questions.find(q=>q.question)
     let scores = { player1: 0, player2: 0 }
     let selectedCardId;
 
-function submitAnswer() {
-  // grab the user's answer
-   const userAnswer = document.getElementById('answer').value.toLowerCase();
-
-
-   const correctAnswer = questions.find(q => q.question.toLowerCase() === document.getElementById(selectedCardId).textContent.toLowerCase()).answer.toLowerCase();
+    function submitAnswer() {
+      // Grab the user's answer
+      const userAnswer = document.getElementById('answer').value.toLowerCase();
+  
+      const correctAnswer = questions.find(q => q.question.toLowerCase() === document.getElementById(selectedCardId).textContent.toLowerCase()).answer.toLowerCase();
       selectedCardId = " ";
-
-  // check if the user's answer matches the correct answer
-  if (userAnswer === correctAnswer) {
-      // give an alert for a correct answer
-      alert('Correct Answer');
-
-      // increment the score of the current player
-      scores[`player${currentPlayer}`] += points;
-
-      // update the displayed score
-      document.getElementById("player" + currentPlayer  + "-score").textContent = scores["player" + currentPlayer]; //change html Id's to be player1-score and player2-score using the same format
-   
-
-
-      //  switchPlayers();
-  } else {
-      
-      scores[`player${currentPlayer}`] -= points
-      document.getElementById("player" + currentPlayer + "-score").textContent = scores["player" + currentPlayer]
-      alert('Incorrect Answer');// give alert for an incorrect answer
-      switchPlayers()//switching players if the score lowers 
-      
+  
+      // Check if the user's answer matches the correct answer
+      if (userAnswer === correctAnswer) {
+          // Give an alert for a correct answer
+          alert('Correct Answer');
+  
+          // Increment the score of the current player
+          scores[`player${currentPlayer}`] += points;
+  
+          // Update the displayed score
+          document.getElementById("player" + currentPlayer + "-score").textContent = scores[`player${currentPlayer}`];
+  
+          // Save scores to local storage
+          localStorage.setItem('scores', JSON.stringify(scores));
+  
+      } else {
+          // Give alert for an incorrect answer
+          scores[`player${currentPlayer}`] -= points;
+          document.getElementById("player" + currentPlayer + "-score").textContent = scores[`player${currentPlayer}`];
+          alert('Incorrect Answer');
+          switchPlayers();
+      }
   }
   
-}
+  // Function to load scores from local storage when the game starts
+  function loadScores() {
+      const savedScores = localStorage.getItem('scores');
+      if (savedScores) {
+          scores = JSON.parse(savedScores);
+          document.getElementById("player1-score").textContent = scores.player1;
+          document.getElementById("player2-score").textContent = scores.player2;
+      }
+  }
+  
+  // Call loadScores when your game initializes
+  loadScores();
+  
     guessButton.addEventListener('click', function(e){//handles input value for correct or wrong answer by invoking submitAnswer() also prvent default because its a button
     e.preventDefault()
         disableButtons()
@@ -119,7 +130,19 @@ function passingAnswer(){
     switchPlayers()
 }
 
+function clearScore(event) {
+   if (event) {
+       event.preventDefault(); // Prevent default action if an event is passed
+   }
+   localStorage.removeItem('scores'); // Remove the score from local storage
+}
 
+ function clearBoard(){
+   guessButton.disabled = true;
+   passButton.disabled = true;
+   nextRound.disabled = true;
+   document.getElementById('answer').value = "";
+ }
 
 function disableButtons(){//disables buttons because global variables speak to the whole document
     guessButton.disabled = true;
@@ -146,6 +169,9 @@ function enablesButtons(){//enables buttons because we call upon them when a que
 
   
  })
+ function saveScore() {
+   localStorage.setItem("playerScore", playerScore);
+}
 
   comedy100.addEventListener("click", (e)=>{
   points = 100; selectedCardId = comedy100.id
@@ -153,6 +179,7 @@ function enablesButtons(){//enables buttons because we call upon them when a que
    let currentQuestion = categoryQuestions.find(q=> q.value === points).question
     comedy100.textContent = currentQuestion
     enablesButtons()
+
 
     
   })
@@ -312,7 +339,7 @@ function enablesButtons(){//enables buttons because we call upon them when a que
     points = 300; selectedCardId = Java300.id
     let categoryQuestions = questions.filter(q=>q.category === "JavaScript")
     let currentQuestion = categoryQuestions.find(q=> q.value === points).question
-    Java300.textContent = currentQuestion
+    Java300.textContent = currentQuestion                                                                      
     enablesButtons()
  })
  Java400.addEventListener("click", (e)=>{
@@ -329,3 +356,4 @@ function enablesButtons(){//enables buttons because we call upon them when a que
     Java500.textContent = currentQuestion
     enablesButtons()
  })
+ saveScore()

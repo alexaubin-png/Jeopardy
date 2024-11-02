@@ -54,39 +54,49 @@ let selectedCardId;
 
 // console.log(questions.find(q => q.question.toLowerCase() === document.getElementById("for200").innerText.toLowerCase()).answer.toLowerCase())
 
+   
+function loadScores() {
+  const savedScores = JSON.parse(localStorage.getItem('scores'));
+  if (savedScores) {
+    scores = savedScores;
+    document.getElementById("player1-score").textContent = scores.player1;
+    document.getElementById("player2-score").textContent = scores.player2;
+  }
+}
 
 function submitAnswer() {
-  // grab the user's answer
   const userAnswer = document.getElementById('answer').value.toLowerCase();
-
-
   const correctAnswer = questions.find(q => q.question.toLowerCase() === document.getElementById(selectedCardId).textContent.toLowerCase()).answer.toLowerCase();
-selectedCardId = " ";
+  selectedCardId = " ";
 
-  // check if the user's answer matches the correct answer
   if (userAnswer === correctAnswer) {
-      // give an alert for a correct answer
-      alert('Correct Answer');
+    alert('Correct Answer');
+    scores[`player${currentPlayer}`] += points;
+    document.getElementById("player" + currentPlayer + "-score").textContent = scores[`player${currentPlayer}`];
 
-      // increment the score of the current player
-      scores[`player${currentPlayer}`] += points;
+    // Save scores to local storage
 
-      // update the displayed score
-      document.getElementById("player" + currentPlayer  + "-score").textContent = scores["player" + currentPlayer]; //change html Id's to be player1-score and player2-score using the same format
-   
-
-
-      //  switchPlayers();
   } else {
-      // give alert for an incorrect answer
-      scores[`player${currentPlayer}`] -= points
-      document.getElementById("player" + currentPlayer + "-score").textContent = scores["player" + currentPlayer]
-      alert('Incorrect Answer');
-      switchPlayers()
-      
+    scores[`player${currentPlayer}`] -= points;
+    document.getElementById("player" + currentPlayer + "-score").textContent = scores[`player${currentPlayer}`];
+    alert('Incorrect Answer');
+    switchPlayers();
   }
- 
+  localStorage.setItem('scores', JSON.stringify(scores));
 }
+
+// Call loadScores when your game initializes
+loadScores();
+
+// Function to load scores from local storage when the game starts
+
+// Call loadScores when your game initializes
+
+
+
+
+
+// Function to update the score and save it to local storage
 
 
 guessButton.addEventListener('click', function(e){
@@ -137,6 +147,19 @@ function enablesButtons(){//enables buttons when called upon in our event Listen
  nextRound.addEventListener('click', (e)=>{
 submitAnswer()
   })
+  function clearScore(event) {
+    if (event) {
+        event.preventDefault(); // Prevent default action if an event is passed
+    }
+    localStorage.removeItem('scores'); // Remove the score from local storage
+}
+
+  function clearBoard(){
+    guessButton.disabled = true;
+    passButton.disabled = true;
+    nextRound.disabled = true;
+    document.getElementById('answer').value = "";
+  }
 
  //TODO: remove commented code, add a function that disables submit and pass, add function that enables submit and pass. add empty event listeners for each card, addEventListener for submit and pass, fill out logic for each card very similar to below, test to see if it works, then add next round functionality with next round button(perhaps query params), add final jeopardy
 for100.addEventListener('click', (e)=>{
