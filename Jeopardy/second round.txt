@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <body>
+        <h1>SECOND ROUND</h1>
+        <h2>Player 2</h2>
+        <!-- make sure to put all the conetent for score chart in a div to divide it with grid(commands are undetermined) -->
+        <div class="hero">
+        <div class="container1">
+            <div class="category1">Category</div>
+            <div class="score">100</div>
+            <div class="score">200</div>
+            <div class="score">300</div>
+            <div class="score">400</div>
+            <div class="score">500</div>
+        </div>
+        <div class="container2">
+            <div class="category1">Category</div>
+            <div class="score">100</div>
+            <div class="score">200</div>
+            <div class="score">300</div>
+            <div class="score">400</div>
+            <div class="score">500</div>
+        </div>
+        <div class="container3">
+            <div class="category1">Category</div>
+            <div class="score">100</div>
+            <div class="score">200</div>
+            <div class="score">300</div>
+            <div class="score">400</div>
+            <div class="score">500</div>
+        </div>
+        <div class="container4">
+            <div class="category1">Category</div>
+            <div class="score">100</div>
+            <div class="score">200</div>
+            <div class="score">300</div>
+            <div class="score">400</div>
+            <div class="score">500</div>
+        </div>
+        <div class="container5">
+            <div class="category1">Category</div>
+            <div class="score">100</div>
+            <div class="score">200</div>
+            <div class="score">300</div>
+            <div class="score">400</div>
+            <div class="score">500</div>
+        </div>
+        </div>
+        
+
+         
+           
+      <!-- feel free to divide this conetnt altho i got it started -->
+      <div class="content">
+                 <input class="text" placeholder="User Input">
+                <br><button class="btn">Guess</button>   <button class="btn">Pass</button>
+           
+          
+                    <p class="seperating-scores1">Player 1 score</p>
+                    <p class="seperating-scores2">Player 2 score</p>     
+               
+                
+                    <button class="btn"><a href="Finalround.html">Next Round</a></button>
+           
+            </div>
+                   
+</body>
+ <footer>2024 Jeporday by: Alex</footer>
+</html>
