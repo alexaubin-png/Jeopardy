@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+    <h1>Final Round</h1>
+    <h2>Player 1</h2>
+    <div class="category2">FINAL CATEGORY</div>
+    <p class="FinalQuestion">Whats the conversion of dog years to human years</p><br>
+    <div class="Finalround-flex">
+        <input placeholder="Point Bet Amount..." class="text"></input><br>
+        <input  placeholder="Final Answer..." class="text"></input><br>
+        <button class="btn4">BET</button>
+    </div>
+    
+</body>
+<footer>2024 Jeporday</footer>
+</html>
